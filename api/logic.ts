@@ -4,7 +4,7 @@ import { createLogic, Logic } from 'redux-logic';
 
 import exampleFiles from '../images/exampleFiles.json';
 import { appendImages, generatePdfComplete, removeAll } from './actions';
-import { textToImage, fileToDataUrl, generatePdf, getImageRatio, sleep } from './lib';
+import { fileToDataUrl, generatePdf, getImageRatio, sleep } from './lib';
 import {
   CardImage,
   GENERATE_PDF,
@@ -17,15 +17,15 @@ import {
   TextToImageAction,
 } from './types';
 
-// import { generate } from 'text-to-image';
+import { generate } from 'text-to-image';
 
 export const textToImageLogic = createLogic({
   type: TEXT_TO_IMAGE,
   async process({ action }: { action: TextToImageAction }, dispatch, done) {
     const text = action.payload;
 
-    const base64src = await textToImage(text)
-    const image: CardImage = {
+    const base64src = await generate(text, {});
+    const image: CardImage =  {
       base64src,
       id: uniqueId('image_'),
       ratio: await getImageRatio(base64src),
@@ -89,7 +89,7 @@ export const generatePdfLogic = createLogic({
     }).catch((err: Error) => alert(err.message));
 
     if (pdf) {
-      if (import.meta.env.NODE_ENV === 'production') {
+      if (process.env.NODE_ENV === 'production') {
         // Force file download
         await pdf.save('Cards.pdf', { returnPromise: true });
       } else {

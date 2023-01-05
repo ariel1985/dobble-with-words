@@ -1,6 +1,5 @@
 import Ajv, { SchemaObject } from 'ajv';
-import Jimp from 'jimp/browser/lib/jimp';
-import fontUrl from '/node_modules/jimp/fonts/open-sans/open-sans-32-black/open-sans-32-black.fnt?url';
+import Jimp from 'jimp';
 import JsPDF from 'jspdf';
 import chunk from 'lodash/chunk';
 import random from 'lodash/random';
@@ -38,23 +37,6 @@ export const generateCards = (n: Prime): number[][] => {
   ]);
 };
 
-/**
- *  
- * text to image 
- */
-
-export const textToImage = async (text: string) => {
-  const font = await Jimp.loadFont(fontUrl);
-  const x = 50
-  const y = 100
-  const image = new Jimp(x, y, 'yellow', (err, image) => {
-    if (err) throw err
-  })
-  image.print(font, x / 4, y / 4, text);
-  // Writing image after processing
-  const based64 = await image.getBase64Async(Jimp.MIME_JPEG);
-  return based64
-}
 /**
  * Promisify the FileReader::readAsDataURL method
  */

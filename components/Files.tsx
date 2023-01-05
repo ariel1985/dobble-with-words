@@ -36,11 +36,8 @@ const Files: FC<Props> = ({
   removeAll,
   removeImage,
   uploadImages,
-}) => {
-
-  const [inputText, setInputText] = React.useState('')
-
-  return (<Container className="pusher">
+}) => (
+  <Container className="pusher">
     <Divider horizontal>
       <Button.Group size="huge">
         <Button primary as="label" htmlFor="fileUpload">
@@ -53,7 +50,7 @@ const Files: FC<Props> = ({
           Load examples - עליית הדוגמאות
         </Button>
         <Button.Or text="or" />
-        <Button onClick={() => textToImage(inputText)}>
+        <Button onClick={loadExamples}>
           <Icon name="images outline" />
           Load images from text
         </Button>
@@ -64,9 +61,8 @@ const Files: FC<Props> = ({
     <input
       type="text"
       id="text4image"
-      value={inputText}
-      onChange={e => setInputText(e.currentTarget.value)}
       style={{ padding: '.2em', margin: '0 1em' }}
+      onKeyUp={e => textToImage(e.currentTarget.value)}
     />
     <input
       type="file"
@@ -99,8 +95,8 @@ const Files: FC<Props> = ({
         </>
       )}
     </Segment>
-  </Container>)
-};
+  </Container>
+);
 
 export default connect((state: State) => ({ images: state.images }), {
   removeAll,
