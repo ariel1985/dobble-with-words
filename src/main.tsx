@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './api/store';
 import App from './components/App';
 import './styles.scss';
+import 'semantic-ui-css/semantic.css';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
