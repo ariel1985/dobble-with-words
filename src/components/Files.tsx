@@ -72,7 +72,7 @@ const Files: FC<Props> = ({
       <Form.Group inline unstackable grouped widths={1}>
         <Form.Field >
           <Button.Or text="or" />
-          <Label horizontal htmlFor="text4image">Enter Text - הכנס טקסט</Label>
+          <Label horizontal htmlFor="text4image">Your Text - מטקסט</Label>
           <Icon name="text cursor" />
           <Input
             type="text"
@@ -80,11 +80,11 @@ const Files: FC<Props> = ({
             value={inputText}
             onChange={e => setInputText(e.currentTarget.value)}
             style={{ padding: '.2em', margin: '0 1em' }}
-            placeholder="Your text - טקסט"
+            placeholder="Enter text - הכנס טקסט"
           />
           <Button onClick={handleSendText}>
             <Icon name="images outline" />
-            Send Text - שלח טקסט
+            Image From Text - תמונה מטקסט
           </Button>
 
         </Form.Field>
