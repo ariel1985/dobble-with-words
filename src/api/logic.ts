@@ -1,6 +1,7 @@
 import shuffle from 'lodash/shuffle';
 import uniqueId from 'lodash/uniqueId';
 import { createLogic, Logic } from 'redux-logic';
+import {generateSync} from 'text-to-image';
 
 import exampleFiles from '../images/exampleFiles.json';
 import { appendImages, generatePdfComplete, removeAll } from './actions';
@@ -17,26 +18,35 @@ import {
   TextToImageAction,
 } from './types';
 
-import { generate } from 'text-to-image';
+
 
 export const textToImageLogic = createLogic({
   type: TEXT_TO_IMAGE,
   async process({ action }: { action: TextToImageAction }, dispatch, done) {
     const text = action.payload;
 
-    const base64src = await generate(text, {});
-    const image: CardImage =  {
+    // let image = btoa(text);
+    // convert text to base64 and add it to the images 
+    // const base64src = generateSync(text, {
+    //   debug: true
+    // });
+    // const ratio = await getImageRatio(base64src);
+
+    let base64src = btoa(text) 
+
+    const image: CardImage = {
       base64src,
       id: uniqueId('image_'),
       ratio: await getImageRatio(base64src),
-      title: action.payload,
+      title: text,
     };
 
     const images: CardImage[] = [image];
     dispatch(appendImages(images));
     done();
-  }, // ./async process
-}); // ./createLogic
+  },
+});
+
 export const uploadImagesLogic = createLogic({
   type: UPLOAD_IMAGES,
   async process({ action }: { action: UploadImagesAction }, dispatch, done) {
@@ -130,5 +140,5 @@ export default [
   uploadImagesLogic,
   generatePdfLogic,
   loadExamplesLogic,
-  textToImageLogic,
+  // textToImageLogic,
 ] as Logic[];
