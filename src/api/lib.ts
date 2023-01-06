@@ -45,7 +45,7 @@ export const generateCards = (n: Prime): number[][] => {
 
 export const textToImage = async (text: string) => {
   const font = await Jimp.loadFont(fontUrl);
-  const x = 50
+  const x = text.length * 40
   const y = 100
   const image = new Jimp(x, y, 'yellow', (err, image) => {
     if (err) throw err
