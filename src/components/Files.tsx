@@ -9,7 +9,7 @@ import {
   Input,
   Image,
   Segment,
-  Label,
+  Confirm,
   Message,
 } from 'semantic-ui-react';
 
@@ -45,6 +45,9 @@ const Files: FC<Props> = ({
   const [inputText, setInputText] = React.useState('')
   const [textError, setTextError] = React.useState('')
 
+  // confirm replace all images with example images
+  const [confirm, setConfirm] = React.useState(false)
+
   function handleSendText(e) {
     if (!inputText.length) {
       return setTextError('Text input cannot be empty - טקסט לא יכול להיות ריק')
@@ -61,7 +64,7 @@ const Files: FC<Props> = ({
           Upload images - בחר תמונות
         </Button>
         <Button.Or text="or" />
-        <Button onClick={loadExamples}>
+        <Button onClick={() => setConfirm(true)}>
           <Icon name="images outline" />
           Load examples - תמונות לדוגמא
         </Button>
@@ -122,6 +125,15 @@ const Files: FC<Props> = ({
         </>
       )}
     </Segment>
+    <Confirm open={confirm}
+      onCancel={() => setConfirm(false)}
+      content='This will remove all photos - כל התמונות הנוכחיות ימחקו'
+      onConfirm={() => {
+        setConfirm(false)
+        loadExamples()
+      }}
+    />
+
   </Container >)
 };
 
