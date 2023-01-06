@@ -16,6 +16,14 @@ height: 75em;
 
 	.pusher {
 		flex: 1;
+		.ui.horizontal.divider {
+			flex-direction: column;
+			display: flex;
+		}
+		.ui.huge.buttons {
+			display: flex;
+			flex-wrap: wrap;
+		}
 	}
 }
 
