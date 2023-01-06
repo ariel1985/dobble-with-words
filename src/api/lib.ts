@@ -9,7 +9,6 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 import { CardImage, CardSymbol, Prime, Settings } from './types';
 
-
 export function toDataURL(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     let xhRequest = new XMLHttpRequest();
@@ -27,23 +26,7 @@ export function toDataURL(url: string): Promise<string> {
     xhRequest.responseType = 'blob';
     xhRequest.send();
   })
-
 }
-
-// export function toDataURL(url: string, callback: (Blob) => any) {
-//   let xhRequest = new XMLHttpRequest();
-
-//   xhRequest.onload = function () {
-//     let reader = new FileReader();
-//     reader.onloadend = function () {
-//       callback(reader.result);
-//     }
-//     reader.readAsDataURL(xhRequest.response);
-//   };
-//   xhRequest.open('GET', url);
-//   xhRequest.responseType = 'blob';
-//   xhRequest.send();
-// }
 
 
 /**
