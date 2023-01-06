@@ -72,7 +72,7 @@ const Files: FC<Props> = ({
     </Divider>
 
     <Form size='large' style={{ display: 'flex', justifyContent: 'center' }}>
-      <Form.Group inline unstackable grouped widths={1}>
+      <Form.Group inline unstackable widths={1}>
         <Form.Field >
           <Button.Or text="or" />
           <Input

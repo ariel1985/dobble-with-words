@@ -1,7 +1,7 @@
 import uniqueId from 'lodash/uniqueId';
 import { createLogic, Logic } from 'redux-logic';
 import { appendImages, generatePdfComplete, removeAll } from './actions';
-import { textToImage, fileToDataUrl, generatePdf, getImageRatio, sleep } from './lib';
+import { textToImage, fileToDataUrl, generatePdf, getImageRatio, sleep, toDataURL } from './lib';
 import {
   CardImage,
   GENERATE_PDF,
@@ -29,8 +29,7 @@ export const textToImageLogic = createLogic({
       title: action.payload,
     };
 
-    const images: CardImage[] = [image];
-    dispatch(appendImages(images));
+    dispatch(appendImages([image]));
     done();
   }, // ./async process
 }); // ./createLogic
@@ -99,20 +98,7 @@ export const generatePdfLogic = createLogic({
   },
 });
 
-// const images: CardImage[] = await Promise.all(
-//   shuffle(exampleFiles).map(async file => {
-//     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-//     const base64src = (await import(`/src/assets/${file}`)) as string;
-//     return {
-//       base64src,
-//       id: uniqueId('image_'),
-//       ratio: await getImageRatio(base64src),
-//       title: file,
-//     };
-//   }),
-// );
 
-const paths = import.meta.glob('/src/assets/animals/*.png', { eager: true })
 
 export const loadExamplesLogic = createLogic({
   type: LOAD_EXAMPLES,
@@ -120,26 +106,24 @@ export const loadExamplesLogic = createLogic({
   async process(obj, dispatch, done) {
     dispatch(removeAll());
 
-    const bases = []
-    for (const path in paths) {
-      const base64src = new URL(path, import.meta.url).href
-      bases.push(base64src)
-    }
-    const images: CardImage[] = await Promise.all(
-      bases.map(async (base64src, id) => {
-        return {
-          base64src,
-          id: uniqueId(`image_${id}`),
-          ratio: await getImageRatio(base64src),
-          title: id,
-        };
-      })
+    const paths = Object.values(
+      import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
     )
+    const blobs = await Promise.all(paths.map(async i => await toDataURL(i)))
 
-    dispatch(appendImages(images));
+    const images: CardImage[] = await Promise.all(blobs.map(async (base64src, i) => {
+      return {
+        base64src,
+        id: uniqueId('image_'),
+        ratio: await getImageRatio(base64src),
+        title: i.toString(),
+      }
+    }))
+
+    dispatch(appendImages(images))
     done()
   }
-});
+})
 
 export default [
   uploadImagesLogic,

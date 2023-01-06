@@ -9,6 +9,43 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 import { CardImage, CardSymbol, Prime, Settings } from './types';
 
+
+export function toDataURL(url: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let xhRequest = new XMLHttpRequest();
+    xhRequest.onload = function () {
+      let reader = new FileReader();
+      reader.onloadend = function () {
+        resolve(reader.result as string);
+      }
+      reader.onerror = function (err) {
+        reject(err)
+      }
+      reader.readAsDataURL(xhRequest.response);
+    };
+    xhRequest.open('GET', url);
+    xhRequest.responseType = 'blob';
+    xhRequest.send();
+  })
+
+}
+
+// export function toDataURL(url: string, callback: (Blob) => any) {
+//   let xhRequest = new XMLHttpRequest();
+
+//   xhRequest.onload = function () {
+//     let reader = new FileReader();
+//     reader.onloadend = function () {
+//       callback(reader.result);
+//     }
+//     reader.readAsDataURL(xhRequest.response);
+//   };
+//   xhRequest.open('GET', url);
+//   xhRequest.responseType = 'blob';
+//   xhRequest.send();
+// }
+
+
 /**
  * Generate supported plains (dimensions) according to the Ray-Chaudhuri–Wilson theorem
  * n - prime number
