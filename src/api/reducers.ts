@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action: Actions): State {
     case APPEND_IMAGES:
       return {
         ...state,
-        images: [...state.images, ...action.payload],
+        images: [...action.payload, ...state.images],
       };
     case GENERATE_PDF:
       return {

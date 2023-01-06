@@ -72,8 +72,6 @@ const Files: FC<Props> = ({
       <Form.Group inline unstackable grouped widths={1}>
         <Form.Field >
           <Button.Or text="or" />
-          <Label horizontal htmlFor="text4image">Your Text - מטקסט</Label>
-          <Icon name="text cursor" />
           <Input
             type="text"
             id="text4image"
@@ -83,7 +81,7 @@ const Files: FC<Props> = ({
             placeholder="Enter text - הכנס טקסט"
           />
           <Button onClick={handleSendText}>
-            <Icon name="images outline" />
+            <Icon name="text cursor" />
             Image From Text - תמונה מטקסט
           </Button>
 

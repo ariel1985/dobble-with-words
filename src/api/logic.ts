@@ -1,8 +1,5 @@
-import shuffle from 'lodash/shuffle';
 import uniqueId from 'lodash/uniqueId';
 import { createLogic, Logic } from 'redux-logic';
-
-import exampleFiles from '../images/exampleFiles.json';
 import { appendImages, generatePdfComplete, removeAll } from './actions';
 import { textToImage, fileToDataUrl, generatePdf, getImageRatio, sleep } from './lib';
 import {
@@ -102,28 +99,46 @@ export const generatePdfLogic = createLogic({
   },
 });
 
+// const images: CardImage[] = await Promise.all(
+//   shuffle(exampleFiles).map(async file => {
+//     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+//     const base64src = (await import(`/src/assets/${file}`)) as string;
+//     return {
+//       base64src,
+//       id: uniqueId('image_'),
+//       ratio: await getImageRatio(base64src),
+//       title: file,
+//     };
+//   }),
+// );
+
+const paths = import.meta.glob('/src/assets/animals/*.png', { eager: true })
+
 export const loadExamplesLogic = createLogic({
   type: LOAD_EXAMPLES,
   latest: true,
   async process(obj, dispatch, done) {
     dispatch(removeAll());
 
+    const bases = []
+    for (const path in paths) {
+      const base64src = new URL(path, import.meta.url).href
+      bases.push(base64src)
+    }
     const images: CardImage[] = await Promise.all(
-      shuffle(exampleFiles).map(async file => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        const base64src = (await import(`../images/${file}`)).default as string;
+      bases.map(async (base64src, id) => {
         return {
           base64src,
-          id: uniqueId('image_'),
+          id: uniqueId(`image_${id}`),
           ratio: await getImageRatio(base64src),
-          title: file,
+          title: id,
         };
-      }),
-    );
+      })
+    )
 
     dispatch(appendImages(images));
-    done();
-  },
+    done()
+  }
 });
 
 export default [
