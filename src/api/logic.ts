@@ -109,14 +109,14 @@ export const loadExamplesLogic = createLogic({
     const paths = Object.values(
       import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
     )
-    const blobs = await Promise.all(paths.map(async i => await toDataURL(i)))
+    const blobs = await Promise.all(paths.map(async url => await toDataURL(url)))
 
-    const images: CardImage[] = await Promise.all(blobs.map(async (base64src, i) => {
+    const images: CardImage[] = await Promise.all(blobs.map(async (base64src, id) => {
       return {
         base64src,
         id: uniqueId('image_'),
         ratio: await getImageRatio(base64src),
-        title: i.toString(),
+        title: id.toString(),
       }
     }))
 

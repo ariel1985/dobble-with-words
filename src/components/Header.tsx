@@ -10,12 +10,11 @@ const HeaderComponent = () => (
         inverted
         className="title"
       />
-      {/* <Header
-        as="h2"
-        content="יש לך תמונות?? יאללה להעלות!"
-        inverted
+      <Header.Subheader
+        content="Dobbble / Spot-it Generator"
         className="subtitle"
-      /> */}
+        inverted
+      />
     </Container>
   </Segment>
 );
