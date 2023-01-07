@@ -14,7 +14,6 @@ import {
   TextToImageAction,
 } from './types';
 
-// import { generate } from 'text-to-image';
 
 export const textToImageLogic = createLogic({
   type: TEXT_TO_IMAGE,
