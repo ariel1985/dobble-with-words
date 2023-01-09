@@ -16,7 +16,6 @@ import {
 } from './types';
 
 
-
 export const loadUrlsLogic = createLogic({
   type: LOAD_URLS,
   latest: true,
@@ -38,6 +37,7 @@ export const loadUrlsLogic = createLogic({
     done()
   }
 })
+
 
 export const textToImageLogic = createLogic({
   type: TEXT_TO_IMAGE,
