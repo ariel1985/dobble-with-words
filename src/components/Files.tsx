@@ -9,12 +9,12 @@ import {
   Input,
   Image,
   Segment,
-  Confirm,
   Message,
+  Modal,
 } from 'semantic-ui-react';
 
 import {
-  loadExamples,
+  loadUrls,
   textToImage,
   removeAll,
   removeImage,
@@ -23,10 +23,15 @@ import {
 import { State } from '../api/store';
 import { CardImage } from '../api/types';
 import Settings from './Settings';
+import Gallery from './Gallery'
+
+const examples = Object.values(
+  import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
+)
 
 interface Props {
   images: CardImage[];
-  loadExamples: typeof loadExamples;
+  loadUrls: typeof loadUrls;
   textToImage: typeof textToImage;
   removeAll: typeof removeAll;
   removeImage: typeof removeImage;
@@ -35,18 +40,22 @@ interface Props {
 
 const Files: FC<Props> = ({
   images,
-  loadExamples,
-  textToImage,
+  loadUrls,
   removeAll,
   removeImage,
+  textToImage,
   uploadImages,
 }) => {
 
   const [inputText, setInputText] = React.useState('')
   const [textError, setTextError] = React.useState('')
 
-  // confirm replace all images with example images
-  const [confirm, setConfirm] = React.useState(false)
+
+  const [gallery, setGallery] = React.useState(false)
+
+  function toggleGallery() {
+    return setGallery((prev) => !prev)
+  }
 
   function handleSendText(e) {
     if (!inputText.length) {
@@ -64,10 +73,13 @@ const Files: FC<Props> = ({
           Upload images - בחר תמונות
         </Button>
         <Button.Or text="or" />
-        <Button onClick={() => setConfirm(true)}>
-          <Icon name="images outline" />
-          Load examples - תמונות לדוגמא
-        </Button>
+        <Modal trigger={
+          <Button onClick={toggleGallery}>
+            <Icon name="images outline" />
+            Image gallery - גלריית תמונות
+          </Button>}
+          content={<Gallery />}
+        />
       </Button.Group>
     </Divider>
 
@@ -87,7 +99,6 @@ const Files: FC<Props> = ({
             <Icon name="text cursor" />
             Image From Text - תמונה מטקסט
           </Button>
-
         </Form.Field>
       </Form.Group>
     </Form>
@@ -102,8 +113,9 @@ const Files: FC<Props> = ({
       style={{ display: 'none' }}
       accept=".png,.jpg,.jpeg"
     />
-    <Segment basic textAlign="center">
-      <Image.Group size="tiny">
+    <Segment>
+
+      <Image.Group size="tiny" style={{ padding: '1em' }}>
         {images.map(({ id, base64src, title }) => (
           <Image
             key={id}
@@ -115,31 +127,14 @@ const Files: FC<Props> = ({
           />
         ))}
       </Image.Group>
-      {images.length > 0 && (
-        <>
-          <Button onClick={removeAll}>
-            <Icon name="trash" />
-            Remove all images
-          </Button>
-          <Settings />
-        </>
-      )}
     </Segment>
-    <Confirm open={confirm}
-      onCancel={() => setConfirm(false)}
-      content='This will remove all photos - כל התמונות הנוכחיות ימחקו'
-      onConfirm={() => {
-        setConfirm(false)
-        loadExamples()
-      }}
-    />
-
-  </Container >)
+  </Container >
+  )
 };
 
 export default connect((state: State) => ({ images: state.images }), {
   removeAll,
-  loadExamples,
+  loadUrls,
   textToImage,
   uploadImages,
   removeImage,
