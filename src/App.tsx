@@ -1,7 +1,7 @@
-import Files from './components/Files';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Summary from './components/Summary';
+import Files from './components/Files'
+import Footer from './components/Footer'
+import Header from './components/Header'
+import Summary from './components/Summary'
 
 const App = () => (
   <>
@@ -10,6 +10,6 @@ const App = () => (
     <Summary />
     <Footer />
   </>
-);
+)
 
-export default App;
+export default App

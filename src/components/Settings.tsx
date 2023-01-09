@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
-import { Button, Icon, Modal, Message } from 'semantic-ui-react';
-import { AutoForm } from 'uniforms-semantic';
+import React, { FC, useState } from 'react'
+import { connect } from 'react-redux'
+import { Button, Icon, Modal, Message } from 'semantic-ui-react'
+import { AutoForm } from 'uniforms-semantic'
 
-import { setSettings } from '../api/actions';
-import { createBridge } from '../api/lib';
-import { State } from '../api/store';
-import { Settings } from '../api/types';
+import { setSettings } from '../api/actions'
+import { createBridge } from '../api/lib'
+import { State } from '../api/store'
+import { Settings } from '../api/types'
 
 const formSchema = createBridge({
   title: 'Settings',
@@ -18,15 +18,15 @@ const formSchema = createBridge({
     symbolMargin: { type: 'number' },
     rotateSymbols: { type: 'boolean' },
   },
-});
+})
 
 interface Props {
-  settings: Settings;
-  setSettings: typeof setSettings;
+  settings: Settings
+  setSettings: typeof setSettings
 }
 
 const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   return (
     <Modal
@@ -46,9 +46,9 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
         <AutoForm
           schema={formSchema}
           model={settings}
-          onSubmit={model => {
-            setSettings(model);
-            setOpen(false);
+          onSubmit={(model) => {
+            setSettings(model)
+            setOpen(false)
           }}
         />
         <Message
@@ -63,9 +63,9 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
         />
       </Modal.Content>
     </Modal>
-  );
-};
+  )
+}
 
 export default connect((state: State) => ({ settings: state.settings }), {
   setSettings,
-})(SettingsComponent);
+})(SettingsComponent)
