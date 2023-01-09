@@ -6,13 +6,37 @@ import {
   CardImage,
   GENERATE_PDF,
   GeneratePdfAction,
-  LOAD_EXAMPLES,
   State,
+  LOAD_URLS,
   UPLOAD_IMAGES,
   UploadImagesAction,
   TEXT_TO_IMAGE,
   TextToImageAction,
+  LoadUrlsAction,
 } from './types';
+
+
+export const loadUrlsLogic = createLogic({
+  type: LOAD_URLS,
+  latest: true,
+  async process({ action }: { action: LoadUrlsAction }, dispatch, done) {
+
+    const urls = action.payload
+
+    const blobs = await Promise.all(urls.map(async url => await toDataURL(url)))
+    const images: CardImage[] = await Promise.all(blobs.map(async (base64src, id) => {
+      return {
+        base64src,
+        id: uniqueId('image_'),
+        ratio: await getImageRatio(base64src),
+        title: id.toString(),
+      }
+    }))
+
+    dispatch(appendImages(images))
+    done()
+  }
+})
 
 
 export const textToImageLogic = createLogic({
@@ -30,8 +54,8 @@ export const textToImageLogic = createLogic({
 
     dispatch(appendImages([image]));
     done();
-  }, // ./async process
-}); // ./createLogic
+  },
+});
 export const uploadImagesLogic = createLogic({
   type: UPLOAD_IMAGES,
   async process({ action }: { action: UploadImagesAction }, dispatch, done) {
@@ -99,34 +123,11 @@ export const generatePdfLogic = createLogic({
 
 
 
-export const loadExamplesLogic = createLogic({
-  type: LOAD_EXAMPLES,
-  latest: true,
-  async process(obj, dispatch, done) {
-    dispatch(removeAll());
 
-    const paths = Object.values(
-      import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
-    )
-    const blobs = await Promise.all(paths.map(async url => await toDataURL(url)))
-
-    const images: CardImage[] = await Promise.all(blobs.map(async (base64src, id) => {
-      return {
-        base64src,
-        id: uniqueId('image_'),
-        ratio: await getImageRatio(base64src),
-        title: id.toString(),
-      }
-    }))
-
-    dispatch(appendImages(images))
-    done()
-  }
-})
 
 export default [
   uploadImagesLogic,
   generatePdfLogic,
-  loadExamplesLogic,
+  loadUrlsLogic,
   textToImageLogic,
 ] as Logic[];

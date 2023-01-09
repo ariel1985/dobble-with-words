@@ -9,12 +9,12 @@ export interface State {
 export const APPEND_IMAGES = 'APPEND_IMAGES';
 export const GENERATE_PDF = 'GENERATE_PDF';
 export const GENERATE_PDF_COMPLETE = 'GENERATE_PDF_COMPLETE';
-export const LOAD_EXAMPLES = 'LOAD_EXAMPLES';
 export const TEXT_TO_IMAGE = 'TEXT_TO_IMAGE';
 export const REMOVE_ALL = 'REMOVE_ALL';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const UPLOAD_IMAGES = 'UPLOAD_IMAGES';
 export const SET_SETTINGS = 'SET_SETTINGS';
+export const LOAD_URLS = 'LOAD_URLS';
 
 // Payload types
 export type Prime = 2 | 3 | 5 | 7 | 11;
@@ -60,8 +60,9 @@ export interface GeneratePdfCompleteAction {
   type: typeof GENERATE_PDF_COMPLETE;
 }
 
-export interface LoadExamplesAction {
-  type: typeof LOAD_EXAMPLES;
+export interface LoadUrlsAction {
+  type: typeof LOAD_URLS;
+  payload: string[],
 }
 
 export interface TextToImageAction {
@@ -91,7 +92,7 @@ export type Actions =
   | AppendImagesAction
   | GeneratePdfAction
   | GeneratePdfCompleteAction
-  | LoadExamplesAction
+  | LoadUrlsAction
   | TextToImageAction
   | RemoveAllAction
   | RemoveImageAction
