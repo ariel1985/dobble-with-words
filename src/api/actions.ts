@@ -20,6 +20,7 @@ import {
   UPLOAD_IMAGES,
   UploadImagesAction,
   TEXT_TO_IMAGE,
+  TextImageParams,
 } from './types'
 
 export const appendImages = (images: CardImage[]): AppendImagesAction => ({
@@ -41,9 +42,9 @@ export const loadUrls = (payload: string[]): LoadUrlsAction => ({
   payload: payload,
 })
 
-export const textToImage = (text: string): TextToImageAction => ({
+export const textToImage = (payload: TextImageParams): TextToImageAction => ({
   type: TEXT_TO_IMAGE,
-  payload: text,
+  payload: payload,
 })
 
 export const removeAll = (): RemoveAllAction => ({

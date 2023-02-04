@@ -7,7 +7,7 @@ import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema'
 
-import { CardImage, CardSymbol, Prime, Settings } from './types'
+import { CardImage, CardSymbol, Prime, Settings, TextImageParams } from './types'
 
 export function toDataURL(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -61,15 +61,12 @@ export const generateCards = (n: Prime): number[][] => {
  */
 
 export const textToImage = async (
-  text: string,
-  bgColor = '#ffffff',
-  textColor = '#000000'
+  { text, bgColor = '#ffffff', textColor = '#000000' }: TextImageParams,
+  x = text.length * 40,
+  y = 100
 ): Promise<Blob> => {
-  const x = text.length * 40
-  const y = 100
-
   const canvas = document.createElement('canvas')
-  if (!canvas.getContext) throw new Error('Browser not supported')
+  if (!canvas.getContext) return Promise.reject('Browser not supported')
   const ctx = canvas.getContext('2d')
   canvas.width = x
   canvas.height = y

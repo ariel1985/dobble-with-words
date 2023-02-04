@@ -43,7 +43,17 @@ export interface CardSymbol {
   rotation: number
 }
 
+export interface TextImageParams {
+  text: string
+  bgColor: string
+  textColor: string
+}
+
 // Action types
+
+export interface TextToImageAction {
+  type: typeof TEXT_TO_IMAGE
+}
 export interface AppendImagesAction {
   type: typeof APPEND_IMAGES
   payload: CardImage[]
@@ -67,7 +77,7 @@ export interface LoadUrlsAction {
 
 export interface TextToImageAction {
   type: typeof TEXT_TO_IMAGE
-  payload: string
+  payload: TextImageParams
 }
 
 export interface RemoveAllAction {

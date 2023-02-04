@@ -1,23 +1,12 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
-import {
-  Button,
-  Container,
-  Divider,
-  Icon,
-  Form,
-  Input,
-  Image,
-  Segment,
-  Message,
-  Modal,
-} from 'semantic-ui-react'
-
+import { Button, Container, Divider, Icon, Input, Image, Segment, Modal } from 'semantic-ui-react'
 import { loadUrls, textToImage, removeAll, removeImage, uploadImages } from '../api/actions'
 import { State } from '../api/store'
 import { CardImage } from '../api/types'
 import Settings from './Settings'
 import Gallery from './Gallery'
+import TextToImage from './Component/TextToImage'
 
 const examples = Object.values(
   import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
@@ -26,35 +15,15 @@ const examples = Object.values(
 interface Props {
   images: CardImage[]
   loadUrls: typeof loadUrls
-  textToImage: typeof textToImage
   removeAll: typeof removeAll
   removeImage: typeof removeImage
   uploadImages: typeof uploadImages
 }
 
-const Files: FC<Props> = ({
-  images,
-  loadUrls,
-  removeAll,
-  removeImage,
-  textToImage,
-  uploadImages,
-}) => {
-  const [inputText, setInputText] = React.useState('')
-  const [textError, setTextError] = React.useState('')
-
+const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImages }) => {
   const [gallery, setGallery] = React.useState(false)
-
   function toggleGallery() {
     return setGallery((prev) => !prev)
-  }
-
-  function handleSendText(e) {
-    if (!inputText.length) {
-      return setTextError('Text input cannot be empty - טקסט לא יכול להיות ריק')
-    }
-    setTextError('')
-    textToImage(inputText)
   }
 
   return (
@@ -77,27 +46,8 @@ const Files: FC<Props> = ({
           />
         </Button.Group>
       </Divider>
+      <TextToImage />
 
-      <Form size="large" style={{ display: 'flex', justifyContent: 'center' }}>
-        <Form.Group inline unstackable widths={1}>
-          <Form.Field>
-            <Button.Or text="or" />
-            <Input
-              type="text"
-              id="text4image"
-              value={inputText}
-              onChange={(e) => setInputText(e.currentTarget.value)}
-              style={{ padding: '.2em', margin: '0 1em' }}
-              placeholder="Enter text - הכנס טקסט"
-            />
-            <Button onClick={handleSendText}>
-              <Icon name="text cursor" />
-              Image From Text - תמונה מטקסט
-            </Button>
-          </Form.Field>
-        </Form.Group>
-      </Form>
-      {textError && <Message warning>{textError}</Message>}
       <Input
         type="file"
         id="fileUpload"
@@ -127,7 +77,6 @@ const Files: FC<Props> = ({
 export default connect((state: State) => ({ images: state.images }), {
   removeAll,
   loadUrls,
-  textToImage,
   uploadImages,
   removeImage,
 })(Files)
