@@ -43,7 +43,8 @@ export const textToImageLogic = createLogic({
   async process({ action }: { action: TextToImageAction }, dispatch, done) {
     const text = action.payload
 
-    const base64src = await textToImage(text)
+    const blob = await textToImage(text)
+    const base64src = URL.createObjectURL(blob)
     const image: CardImage = {
       base64src,
       id: uniqueId('image_'),

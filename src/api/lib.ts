@@ -60,17 +60,27 @@ export const generateCards = (n: Prime): number[][] => {
  * text to image
  */
 
-export const textToImage = async (text: string) => {
-  const font = await Jimp.loadFont(fontUrl)
+export const textToImage = async (
+  text: string,
+  bgColor = '#ffffff',
+  textColor = '#000000'
+): Promise<Blob> => {
   const x = text.length * 40
   const y = 100
-  const image = new Jimp(x, y, 'yellow', (err, image) => {
-    if (err) throw err
+
+  const canvas = document.createElement('canvas')
+  if (!canvas.getContext) throw new Error('Browser not supported')
+  const ctx = canvas.getContext('2d')
+  canvas.width = x
+  canvas.height = y
+  ctx.fillStyle = bgColor
+  ctx.fillRect(0, 0, x, y)
+  ctx.fillStyle = textColor
+  ctx.font = '48px serif'
+  ctx.fillText(text, 5, y / 2)
+  return new Promise((resolve) => {
+    canvas.toBlob(resolve)
   })
-  image.print(font, x / 4, y / 4, text)
-  // Writing image after processing
-  const based64 = await image.getBase64Async(Jimp.MIME_JPEG)
-  return based64
 }
 /**
  * Promisify the FileReader::readAsDataURL method
