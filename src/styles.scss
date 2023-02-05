@@ -64,6 +64,7 @@
 }
 
 .color-picker {
+  position: relative;
   --focus-border: snow;
   --active-border: silver;
   --max-width: 240px;
@@ -76,7 +77,6 @@
   background-color: #fff;
   z-index: 999;
   border-radius: var(--spacing);
-  box-shadow: 0 0 8px silver;
 
   .swatch {
     cursor: pointer;

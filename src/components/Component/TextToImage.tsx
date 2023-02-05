@@ -1,4 +1,4 @@
-import { Button, Form, Icon, Input } from 'semantic-ui-react'
+import { Button, Form, Icon, Input, Popup } from 'semantic-ui-react'
 import { ColorPicker } from './ColorPicker'
 import { Suspense, useState } from 'react'
 import type { TextImageParams } from '../../api/types'
@@ -10,7 +10,7 @@ interface Props {
 
 function TextToImage({ textToImage }: Props) {
   const [textToImageState, setTextToImageState] = useState<TextImageParams>({
-    text: 'Enter text - הכנס טקסט',
+    text: '',
     textColor: '#000000',
     bgColor: '#ffffff',
   })
@@ -43,6 +43,7 @@ function TextToImage({ textToImage }: Props) {
         <Form.Group inline unstackable widths={1}>
           <Form.Field>
             <Input
+              placeholder="Enter text - הכנס טקסט"
               type="text"
               id="text4image"
               value={textToImageState.text}
@@ -51,54 +52,59 @@ function TextToImage({ textToImage }: Props) {
                 padding: '.2em',
                 margin: '0 1em',
               }}
-              placeholder="Enter text - הכנס טקסט"
             />
             <Button onClick={handleSendText}>
               <Icon name="text cursor" />
               Image From Text - תמונה מטקסט
             </Button>
-            <Suspense>
-              <Button
-                icon="paint brush"
-                onClick={() => toggleColorPicker('textColor')}
-                style={{ color: textToImageState.textColor }}
-              />
-              {colorPickerState.textColor && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    zIndex: 9,
-                  }}
-                >
-                  <ColorPicker
-                    id="textColor"
-                    onClick={(color, id) => {
-                      handleInputChange({ [id]: color })
-                    }}
-                  />
-                </div>
-              )}
-              <Button
-                icon="paint brush"
-                style={{ color: textToImageState.bgColor }}
-                onClick={() => toggleColorPicker('bgColor')}
-              />
-              {colorPickerState.bgColor && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    zIndex: 9,
-                  }}
-                >
-                  <ColorPicker
-                    id="bgColor"
-                    onClick={(color, id) => {
-                      handleInputChange({ [id]: color })
-                    }}
-                  />
-                </div>
-              )}
-            </Suspense>
+            <Popup
+              position="bottom center"
+              open={colorPickerState.textColor}
+              content={
+                <>
+                  <h5>Text Color - צבע טקסט</h5>
+                  {colorPickerState.textColor && (
+                    <ColorPicker
+                      id="textColor"
+                      onClick={(color, id) => {
+                        handleInputChange({ [id]: color })
+                      }}
+                    />
+                  )}
+                </>
+              }
+              trigger={
+                <Button
+                  icon="paint brush"
+                  style={{ color: textToImageState.textColor }}
+                  onClick={() => toggleColorPicker('textColor')}
+                />
+              }
+            />
+            <Popup
+              position="bottom center"
+              open={colorPickerState.bgColor}
+              content={
+                <>
+                  <h5>Background Color - צבע רקע</h5>
+                  {colorPickerState.bgColor && (
+                    <ColorPicker
+                      id="bgColor"
+                      onClick={(color, id) => {
+                        handleInputChange({ [id]: color })
+                      }}
+                    />
+                  )}
+                </>
+              }
+              trigger={
+                <Button
+                  icon="paint brush"
+                  style={{ color: textToImageState.bgColor }}
+                  onClick={() => toggleColorPicker('bgColor')}
+                />
+              }
+            />
           </Form.Field>
         </Form.Group>
       </Form>

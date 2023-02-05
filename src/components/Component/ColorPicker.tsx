@@ -27,10 +27,11 @@ export function ColorPicker(props: ColorPickerProps) {
 
   return (
     <div className="color-picker">
-      {colors.map((color) => (
+      {colors.map((color, id) => (
         <button
           id={props.id}
           className="swatch"
+          key={id}
           style={{
             backgroundColor: color,
           }}
