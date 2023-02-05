@@ -1,5 +1,5 @@
 import { Button, Form, Icon, Input } from 'semantic-ui-react'
-import { CirclePicker, EditableInput } from 'react-color'
+import { ColorPicker } from './ColorPicker'
 import { Suspense, useState } from 'react'
 import type { TextImageParams } from '../../api/types'
 import { textToImage } from '../../api/actions'
@@ -70,9 +70,10 @@ function TextToImage({ textToImage }: Props) {
                     zIndex: 9,
                   }}
                 >
-                  <CirclePicker
-                    onChange={(color) => {
-                      handleInputChange({ textColor: color.hex })
+                  <ColorPicker
+                    id="textColor"
+                    onClick={(color, id) => {
+                      handleInputChange({ [id]: color })
                     }}
                   />
                 </div>
@@ -89,9 +90,10 @@ function TextToImage({ textToImage }: Props) {
                     zIndex: 9,
                   }}
                 >
-                  <CirclePicker
-                    onChange={(color) => {
-                      handleInputChange({ bgColor: color.hex })
+                  <ColorPicker
+                    id="bgColor"
+                    onClick={(color, id) => {
+                      handleInputChange({ [id]: color })
                     }}
                   />
                 </div>

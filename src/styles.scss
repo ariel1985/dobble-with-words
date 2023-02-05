@@ -62,3 +62,43 @@
     }
   }
 }
+
+.color-picker {
+  --focus-border: snow;
+  --active-border: silver;
+  --max-width: 240px;
+  --swatch: 18px;
+  --spacing: 4px;
+
+  display: flex;
+  flex-wrap: wrap;
+  max-width: var(--max-width);
+  background-color: #fff;
+  z-index: 999;
+  border-radius: var(--spacing);
+  box-shadow: 0 0 8px silver;
+
+  .swatch {
+    cursor: pointer;
+    border-radius: 50%;
+    width: var(--swatch);
+    height: var(--swatch);
+    margin: var(--spacing);
+    opacity: 0.9;
+    &:focus {
+      opacity: 1;
+      outline: 1px solid var(--focus-border);
+    }
+    &:active {
+      opacity: 1;
+      outline: 1px solid var(--active-border);
+    }
+    //reset
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
