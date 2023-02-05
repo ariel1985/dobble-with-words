@@ -1,6 +1,6 @@
-import { Button, Form, Icon, Input, Popup } from 'semantic-ui-react'
+import { Button, Form, Icon, Input, Popup, Message } from 'semantic-ui-react'
 import { ColorPicker } from './ColorPicker'
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import type { TextImageParams } from '../../api/types'
 import { textToImage } from '../../api/actions'
 import { connect } from 'react-redux'
