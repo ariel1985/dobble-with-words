@@ -70,9 +70,7 @@ export const textToImage = async (
   const ctx = canvas.getContext('2d')
   canvas.width = x
   canvas.height = y
-
   ctx.fillStyle = bgColor
-  ctx.strokeStyle = bgColor
   ctx.fillRect(0, 0, x, y)
   ctx.fillStyle = textColor
   ctx.font = '48px serif'

@@ -30,6 +30,7 @@ function TextToImage({ textToImage }: Props) {
     setTextToImageState((prev) => ({ ...prev, ...newState }))
   }
 
+  //TODO reduce all to false before toggling
   function toggleColorPicker(type: 'textColor' | 'bgColor') {
     setColorPickerState((prev) => ({
       ...prev,
@@ -60,19 +61,6 @@ function TextToImage({ textToImage }: Props) {
             <Popup
               position="bottom center"
               open={colorPickerState.textColor}
-              content={
-                <>
-                  <h5>Text Color - צבע טקסט</h5>
-                  {colorPickerState.textColor && (
-                    <ColorPicker
-                      id="textColor"
-                      onClick={(color, id) => {
-                        handleInputChange({ [id]: color })
-                      }}
-                    />
-                  )}
-                </>
-              }
               trigger={
                 <Button
                   icon="paint brush"
@@ -80,29 +68,38 @@ function TextToImage({ textToImage }: Props) {
                   onClick={() => toggleColorPicker('textColor')}
                 />
               }
+              content={
+                <>
+                  <h5>Text Color - צבע טקסט</h5>
+                  <ColorPicker
+                    id="textColor"
+                    onClick={(color, id) => {
+                      handleInputChange({ [id]: color })
+                    }}
+                  />
+                </>
+              }
             />
             <Popup
               position="bottom center"
               open={colorPickerState.bgColor}
-              content={
-                <>
-                  <h5>Background Color - צבע רקע</h5>
-                  {colorPickerState.bgColor && (
-                    <ColorPicker
-                      id="bgColor"
-                      onClick={(color, id) => {
-                        handleInputChange({ [id]: color })
-                      }}
-                    />
-                  )}
-                </>
-              }
               trigger={
                 <Button
                   icon="paint brush"
                   style={{ color: textToImageState.bgColor }}
                   onClick={() => toggleColorPicker('bgColor')}
                 />
+              }
+              content={
+                <>
+                  <h5>Background Color - צבע רקע</h5>
+                  <ColorPicker
+                    id="bgColor"
+                    onClick={(color, id) => {
+                      handleInputChange({ [id]: color })
+                    }}
+                  />
+                </>
               }
             />
           </Form.Field>
