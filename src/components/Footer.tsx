@@ -21,7 +21,9 @@ const Footer: FC<Props> = ({ images }) => {
         ) : (
           <div>
             Spot it Generator By Rothem Ariel and{' '}
-            <a href="https://yuval.glide.page">Yuval Dikerman</a>
+            <a target="_blank" href="https://yuval.glide.page">
+              Yuval Dikerman
+            </a>
           </div>
         )}
       </Container>

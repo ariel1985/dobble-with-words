@@ -63,7 +63,7 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
               onClick={() => generatePdf(activePlain.n)}
             >
               <Icon loading={processing} name="file pdf outline" />
-              Generate and download PDF file
+              Generate and download PDF file - ייצר קובץ להדפסת קלפי המשחק
             </Button>
           </>
         )}
@@ -85,7 +85,7 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
           <>
             <Button onClick={() => setConfirm(true)}>
               <Icon name="trash" />
-              Remove all images
+              Remove all images - הסרת כל התמונות
             </Button>
             <Settings />
           </>

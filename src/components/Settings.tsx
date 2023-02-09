@@ -37,11 +37,11 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
       trigger={
         <Button>
           <Icon name="cog" />
-          Settings
+          Settings - הגדרות הדפסה
         </Button>
       }
     >
-      <Modal.Header>Adjust settings for the print</Modal.Header>
+      <Modal.Header>Adjust settings for the print - התאמת הגדרות הדפסה</Modal.Header>
       <Modal.Content>
         <AutoForm
           schema={formSchema}
@@ -53,7 +53,7 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
         />
         <Message
           success
-          header="Tips:"
+          header="Tips הערות"
           list={[
             'Page sizes and card radius are in millimeters',
             'Symbol margin is a percentage of a symbol that should be left as a margin between other symbols',
