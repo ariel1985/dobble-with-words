@@ -6,8 +6,23 @@ import chunk from 'lodash/chunk'
 import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema'
-
+import Solitreo from '../assets/fonts/Solitreo-Regular.ttf?url'
 import { CardImage, CardSymbol, Prime, Settings, TextImageParams } from './types'
+
+const urls = Object.values(import.meta.glob('/src/assets/fonts/*.ttf', { eager: true, as: 'url' }))
+export const fonts: Record<string, string> = urls.reduce(
+  (cur, val) => ({ ...cur, [val.split('/').at(-1).split('.').at(0)]: val }),
+  {}
+)
+
+export async function loadFonts(fonts) {
+  for (const [name, url] of Object.entries(fonts)) {
+    let target = new FontFace(name, `url(${url})`)
+    const loaded = await target.load()
+    console.log(`${loaded} ${name} from ${url}`)
+    document.fonts.add(loaded)
+  }
+}
 
 export function toDataURL(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -61,20 +76,23 @@ export const generateCards = (n: Prime): number[][] => {
  */
 
 export const textToImage = async (
-  { text, bgColor = '#ffffff', textColor = '#000000' }: TextImageParams,
-  x = text.length * 40,
-  y = 100
+  { text, bgColor = '#ffffff', textColor = '#000000', font }: TextImageParams,
+  x = text.length * 15,
+  y = 70
 ): Promise<string> => {
   const canvas = document.createElement('canvas')
   if (!canvas.getContext) return Promise.reject('Browser not supported')
-  const ctx = canvas.getContext('2d')
-  canvas.width = x
-  canvas.height = y
-  ctx.fillStyle = bgColor
-  ctx.fillRect(0, 0, x, y)
-  ctx.fillStyle = textColor
-  ctx.font = '48px serif'
-  ctx.fillText(text, 5, y / 2)
+  {
+    const ctx = canvas.getContext('2d')
+    canvas.width = x
+    canvas.height = y
+    ctx.fillStyle = bgColor
+    ctx.fillRect(0, 0, x, y)
+    ctx.textAlign = 'center'
+    ctx.font = `38px ${font}`
+    ctx.fillStyle = textColor
+    ctx.fillText(text, 5, y / 2)
+  }
   let dataURL = canvas.toDataURL('image/png')
   dataURL.replace(/^data:image\/(png|jpg);base64,/, '')
   return new Promise((resolve) => resolve(dataURL))

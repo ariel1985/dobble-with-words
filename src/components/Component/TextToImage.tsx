@@ -1,18 +1,26 @@
-import { Button, Form, Icon, Input, Popup, Message } from 'semantic-ui-react'
+import { Dropdown, Button, Form, Icon, Input, Popup, Message } from 'semantic-ui-react'
 import { ColorPicker } from './ColorPicker'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { TextImageParams } from '../../api/types'
 import { textToImage } from '../../api/actions'
 import { connect } from 'react-redux'
+import { Fonts } from './Fonts'
 interface Props {
   textToImage: typeof textToImage
 }
+
+const fonts = [
+  ['Solitreo-Regular', 'סוליטרו'],
+  ['Rubik-Regular', 'רוביק'],
+  ['Tinos-Regular', 'טינוס'],
+]
 
 function TextToImage({ textToImage }: Props) {
   const [textToImageState, setTextToImageState] = useState<TextImageParams>({
     text: '',
     textColor: '#000000',
     bgColor: '#ffffff',
+    font: fonts[1][0],
   })
 
   const [textError, setTextError] = useState('')
@@ -38,6 +46,8 @@ function TextToImage({ textToImage }: Props) {
     }))
   }
 
+  const [font, setFont] = useState([fonts[1][0]])
+
   return (
     <>
       <Form size="large" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -53,6 +63,11 @@ function TextToImage({ textToImage }: Props) {
                 padding: '.2em',
                 margin: '0 1em',
               }}
+            />
+            <Fonts
+              font={textToImageState.font}
+              setFont={(font) => handleInputChange({ font: font })}
+              fonts={fonts}
             />
             <Button onClick={handleSendText}>
               <Icon name="text cursor" />

@@ -47,6 +47,7 @@ export interface TextImageParams {
   text: string
   bgColor: string
   textColor: string
+  font: string
 }
 
 // Action types
