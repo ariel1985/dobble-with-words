@@ -1,6 +1,6 @@
 import React from 'react'
-import { Modal, Segment, Container } from 'semantic-ui-react'
-
+import { Modal, Button, Segment, Container } from 'semantic-ui-react'
+import AboutSpotit from './Component/AboutSpotit'
 import { connect } from 'react-redux'
 import { State } from '../api/store'
 import { CardImage } from '../api/types'
@@ -10,16 +10,20 @@ interface Props {
 }
 
 const Footer: FC<Props> = ({ images }) => {
-  if (images.length)
-    return (
-      <>
-        By<a href="linkedin.com">Rothem Ariel</a>
-      </>
-    )
   return (
     <Segment inverted vertical className="footer">
       <Container text textAlign="center">
-        Spot it Generator
+        {!images.length ? (
+          <Modal
+            trigger={<Button color="pink">How does it work? - איך זה עובד? לחצו להסבר</Button>}
+            content={<AboutSpotit />}
+          />
+        ) : (
+          <div>
+            Spot it Generator By Rothem Ariel and{' '}
+            <a href="https://yuval.glide.page">Yuval Dikerman</a>
+          </div>
+        )}
       </Container>
     </Segment>
   )

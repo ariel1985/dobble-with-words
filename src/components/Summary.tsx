@@ -43,12 +43,6 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
   return (
     <Container>
       <Segment textAlign="center" raised>
-        {!images.length && (
-          <Modal
-            trigger={<Button color="green">How does it work? - איך זה עובד? לחצו להסבר</Button>}
-            content={<AboutSpotit />}
-          />
-        )}
         <Progress percent={activeProgress} attached="top" color="blue" autoSuccess />
         {activePlain && (
           <>
