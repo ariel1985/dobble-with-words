@@ -1,23 +1,16 @@
-import React from 'react';
-import { Container, Header, Segment } from 'semantic-ui-react';
-
-const HeaderComponent = () => (
+import React from 'react'
+import { Modal, Segment, Header } from 'semantic-ui-react'
+import HeaderComponent from './Component/Header'
+import Video from './Component/Video'
+const Component = () => (
   <Segment inverted textAlign="center" vertical className="header">
-    <Container text>
-      <Header
-        as="h1"
-        content="יצירת משחק דאבל (ספוט איט) להדפסה"
-        inverted
-        className="title"
-      />
-      {/* <Header
-        as="h2"
-        content="יש לך תמונות?? יאללה להעלות!"
-        inverted
-        className="subtitle"
-      /> */}
-    </Container>
+    <HeaderComponent
+      icon={{ name: 'smile outline', inverted: true }}
+      text="יצירת משחק דאבל (ספוט איט) להדפסה"
+    >
+      <Header.Subheader content="Dobbble / Spot-it Generator" className="subtitle" />
+    </HeaderComponent>
   </Segment>
-);
+)
 
-export default HeaderComponent;
+export default Component

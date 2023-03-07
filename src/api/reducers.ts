@@ -7,7 +7,7 @@ import {
   REMOVE_IMAGE,
   SET_SETTINGS,
   State,
-} from './types';
+} from './types'
 
 const initialState: State = {
   images: [],
@@ -19,7 +19,7 @@ const initialState: State = {
     symbolMargin: -0.1, // Percent of card radius
     rotateSymbols: true, // Whether the symbols should be randomly rotated
   },
-};
+}
 
 export default function reducer(state = initialState, action: Actions): State {
   switch (action.type) {
@@ -27,27 +27,27 @@ export default function reducer(state = initialState, action: Actions): State {
       return {
         ...state,
         images: [...action.payload, ...state.images],
-      };
+      }
     case GENERATE_PDF:
       return {
         ...state,
         processing: true,
-      };
+      }
     case GENERATE_PDF_COMPLETE:
       return {
         ...state,
         processing: false,
-      };
+      }
     case REMOVE_ALL:
       return {
         ...state,
         images: [],
-      };
+      }
     case REMOVE_IMAGE:
       return {
         ...state,
-        images: state.images.filter(image => image.id !== action.payload),
-      };
+        images: state.images.filter((image) => image.id !== action.payload),
+      }
     case SET_SETTINGS:
       return {
         ...state,
@@ -55,8 +55,8 @@ export default function reducer(state = initialState, action: Actions): State {
           ...state.settings,
           ...action.payload,
         },
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -1,21 +1,34 @@
-import React from 'react';
-import { Container, Segment } from 'semantic-ui-react';
+import React from 'react'
+import { Modal, Button, Segment, Container } from 'semantic-ui-react'
+import AboutSpotit from './Component/AboutSpotit'
+import { connect } from 'react-redux'
+import { State } from '../api/store'
+import { CardImage } from '../api/types'
 
-const Footer = () => (
-  <Segment inverted vertical className="footer">
-    <Container text textAlign="center">
-      {/* This site is not affiliated in any way with Dobble, Spot It!, its creators
-      or distributors.
-      <br />
-      Dobble and Spot It! are trademarks of ASMODEE GROUP.
-      <br />
-      Example images by{' '}
-      <a href="https://icons8.com/" target="_blank" rel="noreferrer">
-        icons8.com
-      </a> */}
-      &copy; Developed by: <a href="linkedin.com">Rothem Ariel</a>
-    </Container>
-  </Segment>
-);
+interface Props {
+  images: CardImage[]
+}
 
-export default Footer;
+const Footer: FC<Props> = ({ images }) => {
+  return (
+    <Segment inverted vertical className="footer">
+      <Container text textAlign="center">
+        {!images.length ? (
+          <Modal
+            trigger={<Button color="pink">How does it work? - איך זה עובד? לחצו להסבר</Button>}
+            content={<AboutSpotit />}
+          />
+        ) : (
+          <div>
+            Spot it Generator By Rothem Ariel and{' '}
+            <a target="_blank" href="https://yuval.glide.page">
+              Yuval Dikerman
+            </a>
+          </div>
+        )}
+      </Container>
+    </Segment>
+  )
+}
+
+export default connect((state: State) => ({ images: state.images }))(Footer)
