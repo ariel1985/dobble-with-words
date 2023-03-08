@@ -53,6 +53,8 @@ function TextToImage({ textToImage }: Props) {
       <Form size="large" style={{ display: 'flex', justifyContent: 'center' }}>
         <Form.Group inline unstackable widths={1}>
           <Form.Field>
+
+            {/* https://react.semantic-ui.com/elements/input/#variations-action-icon-button - input&button together */}
             <Input
               placeholder="Enter text - הכנס טקסט"
               type="text"
@@ -64,15 +66,14 @@ function TextToImage({ textToImage }: Props) {
                 margin: '0 1em',
               }}
             />
+            <Button onClick={handleSendText} id="btn-text-image">
+              <Icon name="add circle" />{/* Image From Text - תמונה מטקסט */}
+            </Button>
             <Fonts
               font={textToImageState.font}
               setFont={(font) => handleInputChange({ font: font })}
               fonts={fonts}
             />
-            <Button onClick={handleSendText}>
-              <Icon name="text cursor" />
-              Image From Text - תמונה מטקסט
-            </Button>
             <Popup
               position="bottom center"
               open={colorPickerState.textColor}

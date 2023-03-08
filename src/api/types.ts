@@ -9,6 +9,7 @@ export interface State {
 export const APPEND_IMAGES = 'APPEND_IMAGES'
 export const GENERATE_PDF = 'GENERATE_PDF'
 export const GENERATE_PDF_COMPLETE = 'GENERATE_PDF_COMPLETE'
+export const LOAD_EXAMPLES = 'LOAD_EXAMPLES';
 export const TEXT_TO_IMAGE = 'TEXT_TO_IMAGE'
 export const REMOVE_ALL = 'REMOVE_ALL'
 export const REMOVE_IMAGE = 'REMOVE_IMAGE'
@@ -71,6 +72,11 @@ export interface GeneratePdfCompleteAction {
   type: typeof GENERATE_PDF_COMPLETE
 }
 
+
+export interface LoadExamplesAction {
+  type: typeof LOAD_EXAMPLES;
+}
+
 export interface LoadUrlsAction {
   type: typeof LOAD_URLS
   payload: string[]
@@ -103,6 +109,7 @@ export type Actions =
   | AppendImagesAction
   | GeneratePdfAction
   | GeneratePdfCompleteAction
+  | LoadExamplesAction
   | LoadUrlsAction
   | TextToImageAction
   | RemoveAllAction

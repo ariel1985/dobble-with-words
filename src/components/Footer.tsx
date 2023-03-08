@@ -11,15 +11,16 @@ interface Props {
 
 const Footer: FC<Props> = ({ images }) => {
   return (
-    <Segment inverted vertical className="footer">
+    <Segment vertical className="footer">
       <Container text textAlign="center">
         {!images.length ? (
           <Modal
-            trigger={<Button color="pink">How does it work? - איך זה עובד? לחצו להסבר</Button>}
+            trigger={<Button color="violet" id="footer-b4">How does it work?</Button>}
             content={<AboutSpotit />}
           />
         ) : (
           <div>
+            {/* Shows up after adding a picture */}
             Spot it Generator By Rothem Ariel and{' '}
             <a target="_blank" href="https://yuval.glide.page">
               Yuval Dikerman

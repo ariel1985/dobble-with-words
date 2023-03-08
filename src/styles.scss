@@ -16,6 +16,10 @@
   }
 }
 
+#logo {
+  width: 5em;
+}
+
 .ui {
   &.header {
     &.title {
@@ -49,6 +53,9 @@
   &.buttons {
     .or {
       text-transform: none;
+    }
+    .ui.huge.buttons {
+      color: red;
     }
   }
   &.divider {
@@ -101,4 +108,79 @@
     -moz-box-shadow: none;
     box-shadow: none;
   }
+}
+
+
+#btn-upload-images {
+  height: 3em;
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  // display: inline-block;
+  // vertical-align: middle;
+  padding-top: 1em;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#btn-load-examples {
+  height: 3em;
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  padding: 0;
+}
+
+#btn-load-images {
+  height: 3em;
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  padding: 0;
+}
+
+#btn-load-images i {
+  margin: 0;
+  padding: 0;
+}
+
+#btn-text-image {
+  height: 3em;
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  color: white;
+}
+#btn-text-image i{
+  margin: 0;
+  padding: 0;
+}
+
+#text4image {
+  border: 0.3em solid #0b57fc;
+  font-size: 1.2em;
+  margin-bottom: 0.25em;
+}
+
+#header-title {
+  font-size: 1.6em;
+  font-weight: normal;
+  color: #000;
+  border: 0;
+  text-align: center;
+  margin-top: 0em;
+  margin-bottom: 0.3em;
+}
+
+#footer-b4 {
+  background-color: #0b57fc;
+}
+
+#pusher-container {
+  margin-top: 0;
 }

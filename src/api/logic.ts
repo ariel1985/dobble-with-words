@@ -1,11 +1,14 @@
+import shuffle from 'lodash/shuffle';
 import uniqueId from 'lodash/uniqueId'
 import { createLogic, Logic } from 'redux-logic'
+import exampleFiles from '../../images/exampleFiles.json';
 import { appendImages, generatePdfComplete, removeAll } from './actions'
 import { textToImage, fileToDataUrl, generatePdf, getImageRatio, sleep, toDataURL } from './lib'
 import {
   CardImage,
   GENERATE_PDF,
   GeneratePdfAction,
+  LOAD_EXAMPLES,
   State,
   LOAD_URLS,
   UPLOAD_IMAGES,
@@ -118,4 +121,34 @@ export const generatePdfLogic = createLogic({
   },
 })
 
-export default [uploadImagesLogic, generatePdfLogic, loadUrlsLogic, textToImageLogic] as Logic[]
+
+export const loadExamplesLogic = createLogic({
+  type: LOAD_EXAMPLES,
+  latest: true,
+  async process(obj, dispatch, done) {
+    dispatch(removeAll());
+
+    const images: CardImage[] = await Promise.all(
+      shuffle(exampleFiles).map(async file => {
+        const base64src = (await import(`../../images/${file}`)).default as string;
+        return {
+          base64src,
+          id: uniqueId('image_'),
+          ratio: await getImageRatio(base64src),
+          title: file,
+        };
+      }),
+    );
+
+    dispatch(appendImages(images));
+    done();
+  },
+});
+
+export default [
+  uploadImagesLogic, 
+  generatePdfLogic, 
+  loadExamplesLogic,
+  loadUrlsLogic, 
+  textToImageLogic
+] as Logic[]

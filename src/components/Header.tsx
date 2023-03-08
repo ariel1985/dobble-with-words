@@ -1,15 +1,11 @@
-import React from 'react'
+// import React from 'react'
 import { Modal, Segment, Header } from 'semantic-ui-react'
-import HeaderComponent from './Component/Header'
-import Video from './Component/Video'
+// import HeaderComponent from './Component/Header'
+// import Video from './Component/Video'
 const Component = () => (
-  <Segment inverted textAlign="center" vertical className="header">
-    <HeaderComponent
-      icon={{ name: 'smile outline', inverted: true }}
-      text="יצירת משחק דאבל (ספוט איט) להדפסה"
-    >
-      <Header.Subheader content="Dobbble / Spot-it Generator" className="subtitle" />
-    </HeaderComponent>
+  <Segment textAlign="center" basic vertical className="header">
+    <h1 id='header-title'>Double Generator - מחולל דאבל</h1>
+    <img src='morlogo.jpg' id='logo' alt='logo' />
   </Segment>
 )
 

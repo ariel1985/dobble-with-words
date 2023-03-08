@@ -6,6 +6,8 @@ import {
   GENERATE_PDF_COMPLETE,
   GeneratePdfAction,
   GeneratePdfCompleteAction,
+  LOAD_EXAMPLES,
+  LoadExamplesAction,
   LOAD_URLS,
   LoadUrlsAction,
   TextToImageAction,
@@ -36,6 +38,10 @@ export const generatePdf = (n: Prime): GeneratePdfAction => ({
 export const generatePdfComplete = (): GeneratePdfCompleteAction => ({
   type: GENERATE_PDF_COMPLETE,
 })
+
+export const loadExamples = (): LoadExamplesAction => ({
+  type: LOAD_EXAMPLES,
+});
 
 export const loadUrls = (payload: string[]): LoadUrlsAction => ({
   type: LOAD_URLS,

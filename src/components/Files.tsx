@@ -1,7 +1,12 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { Button, Container, Divider, Icon, Input, Image, Segment, Modal } from 'semantic-ui-react'
-import { loadUrls, textToImage, removeAll, removeImage, uploadImages } from '../api/actions'
+import { 
+  loadExamples, 
+  loadUrls, textToImage, 
+  removeAll, removeImage, 
+  uploadImages
+} from '../api/actions'
 import { State } from '../api/store'
 import { CardImage } from '../api/types'
 import Settings from './Settings'
@@ -14,39 +19,44 @@ const examples = Object.values(
 
 interface Props {
   images: CardImage[]
+  loadExamples: typeof loadExamples;
   loadUrls: typeof loadUrls
   removeAll: typeof removeAll
   removeImage: typeof removeImage
   uploadImages: typeof uploadImages
 }
 
-const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImages }) => {
+const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImages, loadExamples }) => {
   const [gallery, setGallery] = React.useState(false)
   function toggleGallery() {
     return setGallery((prev) => !prev)
   }
 
   return (
-    <Container className="pusher">
-      <Divider horizontal>
+    <Container className="pusher" >
+      <Divider horizontal id="pusher-container">
+        {/* <Button.Group size="huge" vertical> */}
         <Button.Group size="huge">
-          <Button primary as="label" htmlFor="fileUpload">
+          <Button as="label" htmlFor="fileUpload" color="violet" id="btn-upload-images">
             <Icon name="cloud upload" />
-            Upload images - בחר תמונות
+            Upload images
           </Button>
-          <Button.Or text="or" />
-          <Modal
+          <Button onClick={loadExamples} color="violet" id="btn-load-examples">
+            <Icon name="images outline" />
+            Load examples
+          </Button>
+          {/* <Modal
             trigger={
-              <Button onClick={toggleGallery}>
+              <Button onClick={toggleGallery} color="violet" id="btn-load-images">
                 <Icon name="images outline" />
-                Image gallery - גלריית תמונות
+                Select From Image gallery - גלריית תמונות
               </Button>
             }
             content={<Gallery />}
-          />
+          /> */}
+          <TextToImage />
         </Button.Group>
       </Divider>
-      <TextToImage />
 
       <Input
         type="file"
@@ -79,4 +89,5 @@ export default connect((state: State) => ({ images: state.images }), {
   loadUrls,
   uploadImages,
   removeImage,
+  loadExamples
 })(Files)
