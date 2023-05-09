@@ -10,7 +10,6 @@ import {
 import { State } from '../api/store'
 import { CardImage } from '../api/types'
 import Settings from './Settings'
-import Gallery from './Gallery'
 import TextToImage from './Component/TextToImage'
 const examples = Object.values(
   import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
