@@ -50,9 +50,9 @@ function AboutSpotit() {
             height="315"
             src="https://www.youtube.com/embed/-TgMfaqNdAs"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </Accordion.Content>
         <Accordion.Title active={activeIndex === 2} index={2} onClick={handleClick}>

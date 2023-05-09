@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Modal, Button, Segment, Container } from 'semantic-ui-react'
 import AboutSpotit from './Component/AboutSpotit'
 import { connect } from 'react-redux'

@@ -70,43 +70,47 @@ export const generateCards = (n: Prime): number[][] => {
   ])
 }
 
+
 /**
- *
- * text to image
- */
-// FIXME: extend the image width
-// x = text.length * 20,
+ * text to image - the good version
+ * */
 export const textToImage = async (
   { text, bgColor = '#ffffff', textColor = '#000000', font }: TextImageParams,
-  x = 300, 
-  y = 100
+  x = 600, 
+  y = 200
 ): Promise<string> => {
-  const canvas = document.createElement('canvas')
-  if (!canvas.getContext) return Promise.reject('Browser not supported')
+  const canvas = document.createElement('canvas');
+  if (!canvas.getContext) return Promise.reject('Browser not supported');
   {
     const ctx = canvas.getContext('2d');
-    // ctx.reset(); // clear canvas (js)
-    // ctx.clearRect(0, 0, canvas.width, canvas.height); // clear canvas (react)
 
-    // since it's a new element been created, 
-    // set the width according to the text length using measureText
-    const maxWidth = ctx.measureText(text).width;
+    // Measure the text width and calculate font size
+    let fontSize = 50;
+    const textWidth = ctx.measureText(text).width;
+    while (fontSize < y && ctx.measureText(text).width < x) {
+      fontSize++;
+      ctx.font = `${fontSize}px ${font}`;
+    }
+    fontSize--;
 
-    canvas.width = maxWidth
-    canvas.height = y
+    // Set canvas size
+    canvas.width = x;
+    canvas.height = y;
 
-    ctx.fillStyle = 'black' // bgColor
-    ctx.fillRect(0, 0, x, y)
-    // ctx.textAlign = 'center'
-    ctx.font = `7em ${font}`;
+    // Draw text
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, x, y);
     ctx.textAlign = 'center';
-    ctx.fillStyle = 'white' // textColor
-    ctx.fillText(text, 100, 40, maxWidth);
+    ctx.textBaseline = 'middle';
+    ctx.font = `${fontSize}px ${font}`;
+    ctx.fillStyle = textColor;
+    ctx.fillText(text, x / 2, y / 2, x);
   }
-  let dataURL = canvas.toDataURL('image/png')
-  dataURL.replace(/^data:image\/(png|jpg);base64,/, '')
-  return new Promise((resolve) => resolve(dataURL))
-}
+
+  let dataURL = canvas.toDataURL('image/png');
+  dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  return new Promise((resolve) => resolve(dataURL));
+};
 
 
 /**
