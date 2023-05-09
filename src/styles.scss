@@ -184,3 +184,44 @@
 #pusher-container {
   margin-top: 0;
 }
+
+#btn-generate-pdf {
+  height: 3em;
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  color: white;
+}
+
+#btn-generate-pdf:hover {
+  background-color: #2062f1ed;
+}
+
+#btn-remove-images {
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  color: white;
+}
+
+#btn-print-settings {
+  background-color: #0b57fc;
+  margin-right: 1em;
+  margin-top: 1em;
+  border-radius: 5px;
+  color: white;
+}
+
+.credits {
+  font-size: 0.8em;
+  color: #0b57fc;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.credits a {
+  color: #0b57fc;
+  font-weight: bold;
+}

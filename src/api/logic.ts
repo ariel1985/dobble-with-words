@@ -126,8 +126,10 @@ export const loadExamplesLogic = createLogic({
   type: LOAD_EXAMPLES,
   latest: true,
   async process(obj, dispatch, done) {
-    dispatch(removeAll());
-
+      dispatch(removeAll());
+      const animals = Object.values(
+    import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
+  )
     const images: CardImage[] = await Promise.all(
       shuffle(exampleFiles).map(async file => {
         const base64src = (await import(`../../images/${file}`)).default as string;

@@ -12,7 +12,6 @@ import { CardImage } from '../api/types'
 import Settings from './Settings'
 import Gallery from './Gallery'
 import TextToImage from './Component/TextToImage'
-
 const examples = Object.values(
   import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
 )
@@ -31,6 +30,9 @@ const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImag
   function toggleGallery() {
     return setGallery((prev) => !prev)
   }
+  const animals = Object.values(
+    import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
+  )
 
   return (
     <Container className="pusher" >
@@ -41,7 +43,8 @@ const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImag
             <Icon name="cloud upload" />
             Upload images
           </Button>
-          <Button onClick={loadExamples} color="violet" id="btn-load-examples">
+          {/* TODO: remove loadExamples */}
+          <Button onClick={() => loadUrls(animals)} color="violet" id="btn-load-examples">
             <Icon name="images outline" />
             Load examples
           </Button>

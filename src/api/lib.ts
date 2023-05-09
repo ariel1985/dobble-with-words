@@ -74,30 +74,41 @@ export const generateCards = (n: Prime): number[][] => {
  *
  * text to image
  */
-
+// FIXME: extend the image width
+// x = text.length * 20,
 export const textToImage = async (
   { text, bgColor = '#ffffff', textColor = '#000000', font }: TextImageParams,
-  x = text.length * 15,
-  y = 70
+  x = 300, 
+  y = 100
 ): Promise<string> => {
   const canvas = document.createElement('canvas')
   if (!canvas.getContext) return Promise.reject('Browser not supported')
   {
-    const ctx = canvas.getContext('2d')
-    canvas.width = x
+    const ctx = canvas.getContext('2d');
+    // ctx.reset(); // clear canvas (js)
+    // ctx.clearRect(0, 0, canvas.width, canvas.height); // clear canvas (react)
+
+    // since it's a new element been created, 
+    // set the width according to the text length using measureText
+    const maxWidth = ctx.measureText(text).width;
+
+    canvas.width = maxWidth
     canvas.height = y
-    ctx.fillStyle = bgColor
+
+    ctx.fillStyle = 'black' // bgColor
     ctx.fillRect(0, 0, x, y)
-    ctx.textAlign = 'center'
-    ctx.font = `38px ${font}`
-    ctx.fillStyle = textColor
-    ctx.fillText(text, 5, y / 2)
+    // ctx.textAlign = 'center'
+    ctx.font = `7em ${font}`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white' // textColor
+    ctx.fillText(text, 100, 40, maxWidth);
   }
   let dataURL = canvas.toDataURL('image/png')
   dataURL.replace(/^data:image\/(png|jpg);base64,/, '')
   return new Promise((resolve) => resolve(dataURL))
-  // })
 }
+
+
 /**
  * Promisify the FileReader::readAsDataURL method
  */

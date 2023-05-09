@@ -35,7 +35,7 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
       open={open}
       dimmer="blurring"
       trigger={
-        <Button>
+        <Button id="btn-print-settings">
           <Icon name="cog" />
           Settings - הגדרות הדפסה
         </Button>

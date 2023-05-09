@@ -19,12 +19,17 @@ const Footer: FC<Props> = ({ images }) => {
             content={<AboutSpotit />}
           />
         ) : (
-          <div>
-            {/* Shows up after adding a picture */}
-            Spot it Generator By Rothem Ariel and{' '}
+          <div className='credits'>
+            <h5>Credits</h5>
+            This site is not affiliated in any way with Dobble, Spot It!, its creators or distributors.<br />
+            Dobble and Spot It! are trademarks of ASMODEE GROUP.<br />
+            Example images by <a target="_blank" href="https://icons8.com/">icons8.com</a><br />
+            Implemented by <a target="_blank" href="https://www.linkedin.com/in/rothemariel/">Ro Ariel</a> 
+            {' '}and{' '}
             <a target="_blank" href="https://yuval.glide.page">
               Yuval Dikerman
-            </a>
+            </a><br />
+             Based on <a target="_blank" href="https://macrusher.github.io/dobble-generator/">Dobble Generator</a> by <a target="_blank" href="https://github.com/MacRusher">MacRusher</a>
           </div>
         )}
       </Container>

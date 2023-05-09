@@ -57,6 +57,7 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
               )}
             </Header>
             <Button
+              id="btn-generate-pdf"
               size="massive"
               positive
               disabled={processing}
@@ -83,7 +84,7 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
 
         {images.length > 0 && (
           <>
-            <Button onClick={() => setConfirm(true)}>
+            <Button onClick={() => setConfirm(true)} id="btn-remove-images">
               <Icon name="trash" />
               Remove all images - הסרת כל התמונות
             </Button>
