@@ -111,5 +111,5 @@ tests/cases/user/prettier/prettier
 .eslintcache
 *v8.log
 
-package.json
+
 package-lock.json
