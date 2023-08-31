@@ -1,5 +1,5 @@
 import Ajv, { SchemaObject } from 'ajv'
-import Jimp from 'jimp/browser/lib/jimp'
+import * as Jimp from 'jimp/browser/lib/jimp'
 import fontUrl from '/node_modules/jimp/fonts/open-sans/open-sans-32-black/open-sans-32-black.fnt?url'
 import JsPDF from 'jspdf'
 import chunk from 'lodash/chunk'
