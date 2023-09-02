@@ -5,7 +5,7 @@ import EnvironmentPlugin from 'vite-plugin-environment'
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    outDir: 'build',
+    outDir: './dist',
     emptyOutDir: true,
     assetsInlineLimit: 4096 * 300
   },
