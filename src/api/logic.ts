@@ -132,7 +132,7 @@ export const loadExamplesLogic = createLogic({
   )
     const images: CardImage[] = await Promise.all(
       shuffle(exampleFiles).map(async file => {
-        const base64src = (await import(`../../images/${file}`)).default as string;
+        const base64src = (await import(`../../images/${file}.png`)).default as string;
         return {
           base64src,
           id: uniqueId('image_'),
