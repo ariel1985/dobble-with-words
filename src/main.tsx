@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import store from './api/store'
-import App from './App'
-import './styles.scss'
+import store from '@/api/store'
+import App from '@/App'
+import '@/styles.scss'
 import 'semantic-ui-css/semantic.css'
+import { loadFonts } from '@/assets/fonts'
 
-import { loadFonts } from './assets/fonts'
 
 
 try {
