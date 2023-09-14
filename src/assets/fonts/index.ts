@@ -1,7 +1,4 @@
 
-
-
-
 export async function loadFonts(urls: string[]) {
 const fonts: Record<string, string> = urls.reduce(
   (cur, val) => ({ ...cur, [val.split('/').at(-1).split('.').at(0)]: val }),
@@ -16,8 +13,3 @@ const fonts: Record<string, string> = urls.reduce(
   }
 }
 
-try {
-    loadFonts(fonts)
-} catch (e) {
-    console.error(e)
-}

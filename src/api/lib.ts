@@ -1,28 +1,11 @@
 import Ajv, { SchemaObject } from 'ajv'
 import * as Jimp from 'jimp/browser/lib/jimp'
-import fontUrl from '/node_modules/jimp/fonts/open-sans/open-sans-32-black/open-sans-32-black.fnt?url'
 import JsPDF from 'jspdf'
 import chunk from 'lodash/chunk'
 import random from 'lodash/random'
 import shuffle from 'lodash/shuffle'
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema'
-import Solitreo from '../assets/fonts/Solitreo-Regular.ttf?url'
 import { CardImage, CardSymbol, Prime, Settings, TextImageParams } from './types'
-
-const urls = Object.values(import.meta.glob('/src/assets/fonts/*.ttf', { eager: true, as: 'url' }))
-export const fonts: Record<string, string> = urls.reduce(
-  (cur, val) => ({ ...cur, [val.split('/').at(-1).split('.').at(0)]: val }),
-  {}
-)
-
-export async function loadFonts(fonts) {
-  for (const [name, url] of Object.entries(fonts)) {
-    let target = new FontFace(name, `url(${url})`)
-    const loaded = await target.load()
-    console.log(`${loaded} ${name} from ${url}`)
-    document.fonts.add(loaded)
-  }
-}
 
 export function toDataURL(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
