@@ -5,9 +5,15 @@ import App from './App'
 import './styles.scss'
 import 'semantic-ui-css/semantic.css'
 
-import { loadFonts, fonts } from './api/lib'
+import { loadFonts } from './assets/fonts'
 
-loadFonts(fonts)
+
+try {
+  loadFonts(Object.values(import.meta.glob('./assets/fonts/*.ttf', { eager: true, as: 'url' })))
+} catch (e) {
+  console.error(e)
+}
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
