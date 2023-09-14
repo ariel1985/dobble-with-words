@@ -1,10 +1,10 @@
-import { Dropdown, Button, Form, Icon, Input, Popup, Message } from 'semantic-ui-react'
-import { ColorPicker } from './ColorPicker'
-import { useEffect, useState } from 'react'
-import type { TextImageParams } from '../../api/types'
-import { textToImage } from '../../api/actions'
+import {  Button, Form, Icon, Input, Popup, Message } from 'semantic-ui-react'
+import { ColorPicker } from '@/components/Editor/ColorPicker'
+import {  useState } from 'react'
+import type { TextImageParams } from '@/api/types'
+import { textToImage } from '@/api/actions'
 import { connect } from 'react-redux'
-import { Fonts } from './Fonts'
+import { Fonts } from '@/components/Editor/Fonts'
 interface Props {
   textToImage: typeof textToImage
 }

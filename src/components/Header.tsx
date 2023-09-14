@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Modal, Segment, Header } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 // import HeaderComponent from './Component/Header'
 // import Video from './Component/Video'
 const Component = () => (

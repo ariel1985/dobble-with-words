@@ -3,17 +3,14 @@ import { connect } from 'react-redux'
 import { Button, Container, Divider, Icon, Input, Image, Segment, Modal } from 'semantic-ui-react'
 import { 
   loadExamples, 
-  loadUrls, textToImage, 
+  loadUrls, 
   removeAll, removeImage, 
   uploadImages
-} from '../api/actions'
-import { State } from '../api/store'
-import { CardImage } from '../api/types'
-import Settings from './Settings'
-import TextToImage from './Component/TextToImage'
-const examples = Object.values(
-  import.meta.glob('/src/assets/animals/*.png', { eager: true, as: 'url' })
-)
+} from '@/api/actions'
+import { State } from '@/api/store'
+import { CardImage } from '@/api/types'
+import TextToImage from '@/components/Editor/TextToImage'
+
 
 interface Props {
   images: CardImage[]

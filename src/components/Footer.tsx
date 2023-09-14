@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import  { FC } from 'react'
 import { Modal, Button, Segment, Container } from 'semantic-ui-react'
-import AboutSpotit from './Component/AboutSpotit'
+import AboutSpotit from '@/components/Editor/AboutSpotit'
 import { connect } from 'react-redux'
-import { State } from '../api/store'
-import { CardImage } from '../api/types'
+import { State } from '@/api/store'
+import { CardImage } from '@/api/types'
 
 interface Props {
   images: CardImage[]

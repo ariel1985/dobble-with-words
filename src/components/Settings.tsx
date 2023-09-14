@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react'
+import  { FC, useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Icon, Modal, Message } from 'semantic-ui-react'
 import { AutoForm } from 'uniforms-semantic'
 
-import { setSettings } from '../api/actions'
-import { createBridge } from '../api/lib'
-import { State } from '../api/store'
-import { Settings } from '../api/types'
+import { setSettings } from '@/api/actions'
+import { createBridge } from '@/api/lib'
+import { State } from '@/api/store'
+import { Settings } from '@/api/types'
 
 const formSchema = createBridge({
   title: 'Settings',

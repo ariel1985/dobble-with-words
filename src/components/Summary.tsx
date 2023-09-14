@@ -9,7 +9,6 @@ import {
   Icon,
   Progress,
   Segment,
-  Modal,
   Confirm,
 } from 'semantic-ui-react'
 import Settings from './Settings'
@@ -17,7 +16,6 @@ import { generatePdf, removeAll } from '../api/actions'
 import { plains } from '../api/lib'
 import { State } from '../api/store'
 import { CardImage } from '../api/types'
-import AboutSpotit from './Component/AboutSpotit'
 
 interface Props {
   images: CardImage[]
