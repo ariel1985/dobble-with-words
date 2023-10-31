@@ -4,7 +4,7 @@ import { Segment } from 'semantic-ui-react'
 // import Video from './Component/Video'
 const Component = () => (
   <Segment textAlign="center" basic vertical className="header">
-    <h1 id='header-title'>Double Generator - מחולל דאבל</h1>
+    <h1 id='header-title'>מחולל צמדים</h1>
     <img src='/logo.jpg' id='logo' alt='logo' />
   </Segment>
 )
