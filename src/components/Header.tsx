@@ -5,7 +5,7 @@ import { Segment } from 'semantic-ui-react'
 const Component = () => (
   <Segment textAlign="center" basic vertical className="header">
     <h1 id='header-title'>Double Generator - מחולל דאבל</h1>
-    <img src='morlogo.jpg' id='logo' alt='logo' />
+    <img src='/logo.jpg' id='logo' alt='logo' />
   </Segment>
 )
 
