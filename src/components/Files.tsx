@@ -37,12 +37,13 @@ const Files: FC<Props> = ({ images, loadUrls, removeAll, removeImage, uploadImag
         <Button.Group size="huge">
           <Button as="label" htmlFor="fileUpload" color="violet" id="btn-upload-images">
             <Icon name="cloud upload" />
-            Upload images
+            העלאת תמונות
           </Button>
           {/* TODO: remove loadExamples */}
           <Button onClick={() => loadUrls(animals)} color="violet" id="btn-load-examples">
             <Icon name="images outline" />
-            Load examples
+
+            טעינת דוגמאות
           </Button>
           {/* <Modal
             trigger={
