@@ -45,12 +45,17 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
         {activePlain && (
           <>
             <Header as="h5" className="instructions">
-              You can generate {activePlain.symbols} cards with {activePlain.symbolsPerCard} images
-              per card.
+              {/* You can generate {activePlain.symbols} cards with {activePlain.symbolsPerCard} images
+              per card. */}
+
+              ניתן לייצר {activePlain.symbols} קלפים עם {activePlain.symbolsPerCard} תמונות בכל קלף
+
               {count > activePlain.symbols && (
                 <Header.Subheader as="h6">
-                  You have uploaded too much images. Last {count - activePlain.symbols} images will
-                  not be used.
+                  {/* You have uploaded too much images. Last {count - activePlain.symbols} images will
+                  not be used. */}
+                  יש יותר מדי תמונות. 
+                  ה{count - activePlain.symbols} התמונות האחרונות לא יעלו
                 </Header.Subheader>
               )}
             </Header>
@@ -62,7 +67,8 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
               onClick={() => generatePdf(activePlain.n)}
             >
               <Icon loading={processing} name="file pdf outline" />
-              Generate and download PDF file - ייצר קובץ להדפסת קלפי המשחק
+              {/* Generate and download PDF file -  */}
+              ייצר קובץ להדפסת קלפי המשחק
             </Button>
           </>
         )}
@@ -75,8 +81,10 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
 
         {nextPlain && (
           <Header as="h5" className="instructions">
-            Add {nextPlain.symbols - count} more images to generate {nextPlain.symbols} cards with{' '}
-            {nextPlain.symbolsPerCard} images per card
+            {/* Add {nextPlain.symbols - count} more images to generate {nextPlain.symbols} cards with{' '}
+            {nextPlain.symbolsPerCard} images per card */}
+
+            יש להוסיף {nextPlain.symbols - count} תמונות ליצירת {nextPlain.symbols}  קלפים עם {nextPlain.symbolsPerCard} תמונות לקלף 
           </Header>
         )}
 
