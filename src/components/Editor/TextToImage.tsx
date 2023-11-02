@@ -28,7 +28,8 @@ function TextToImage({ textToImage }: Props) {
 
   function handleSendText(e) {
     if (!textToImageState.text.length) {
-      return setTextError('Text input cannot be empty - טקסט לא יכול להיות ריק')
+      // return setTextError('Text input cannot be empty')
+      return setTextError('טקסט לא יכול להיות ריק')
     }
     setTextError('')
     textToImage(textToImageState)
@@ -69,18 +70,18 @@ function TextToImage({ textToImage }: Props) {
             <Button onClick={handleSendText} id="btn-text-image">
               <Icon name="add circle" />{/* Image From Text - תמונה מטקסט */}
             </Button>
-            <Fonts
+            {/* <Fonts
               font={textToImageState.font}
               setFont={(font) => handleInputChange({ font: font })}
               fonts={fonts}
-            />
+            /> */}
             <Popup
               position="bottom center"
               open={colorPickerState.textColor}
               trigger={
                 <Button
                   icon="paint brush"
-                  style={{ color: textToImageState.textColor }}
+                  style={{ color: textToImageState.textColor, 'border': '4px solid lightgray', 'border-radius': '5px', 'margin':' 0 5px' }}
                   onClick={() => toggleColorPicker('textColor')}
                 />
               }
@@ -102,7 +103,7 @@ function TextToImage({ textToImage }: Props) {
               trigger={
                 <Button
                   icon="paint brush"
-                  style={{ color: textToImageState.bgColor }}
+                  style={{ color: textToImageState.bgColor, 'border': '4px solid lightgray', 'border-radius': '5px', 'margin':' 0 5px' }}
                   onClick={() => toggleColorPicker('bgColor')}
                 />
               }
