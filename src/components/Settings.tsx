@@ -37,11 +37,13 @@ const SettingsComponent: FC<Props> = ({ settings, setSettings }) => {
       trigger={
         <Button id="btn-print-settings">
           <Icon name="cog" />
-          Settings - הגדרות הדפסה
+          {/* Settings */}
+          הגדרות הדפסה
         </Button>
       }
     >
-      <Modal.Header>Adjust settings for the print - התאמת הגדרות הדפסה</Modal.Header>
+      {/* <Modal.Header>Adjust settings for the print</Modal.Header> */}
+      <Modal.Header> התאמת הגדרות הדפסה</Modal.Header>
       <Modal.Content>
         <AutoForm
           schema={formSchema}

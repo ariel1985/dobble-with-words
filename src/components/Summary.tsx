@@ -75,7 +75,7 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
 
         {activePlain && nextPlain && (
           <Divider horizontal className="padded">
-            Or
+            או
           </Divider>
         )}
 
@@ -90,17 +90,22 @@ const Summary: FC<Props> = ({ images, plains, processing, generatePdf, removeAll
 
         {images.length > 0 && (
           <>
+            {/* <Button onClick={() => setConfirm(true)} id="btn-remove-images">
+              <Icon name="trash" />
+              Remove all images
+            </Button> */}
             <Button onClick={() => setConfirm(true)} id="btn-remove-images">
               <Icon name="trash" />
-              Remove all images - הסרת כל התמונות
+              הסרת כל התמונות
             </Button>
             <Settings />
           </>
         )}
+          {/* content="This will remove all photos - כל התמונות הנוכחיות ימחקו" */}
         <Confirm
           open={confirm}
           onCancel={() => setConfirm(false)}
-          content="This will remove all photos - כל התמונות הנוכחיות ימחקו"
+          content="כל התמונות הנוכחיות ימחקו"
           onConfirm={() => {
             setConfirm(false)
             removeAll()
