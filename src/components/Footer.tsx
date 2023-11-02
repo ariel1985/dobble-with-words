@@ -14,8 +14,13 @@ const Footer: FC<Props> = ({ images }) => {
     <Segment vertical className="footer">
       <Container text textAlign="center">
         {!images.length ? (
+          // <Modal
+          //   trigger={<Button color="violet" id="footer-b4">How does it work?</Button>}
+          //   content={<AboutSpotit />}
+          // />
+
           <Modal
-            trigger={<Button color="violet" id="footer-b4">How does it work?</Button>}
+            trigger={<Button color="violet" id="footer-b4">?איך זה עובד</Button>}
             content={<AboutSpotit />}
           />
         ) : (
