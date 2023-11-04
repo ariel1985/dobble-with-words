@@ -5,6 +5,8 @@ import type { TextImageParams } from '@/api/types'
 import { textToImage } from '@/api/actions'
 import { connect } from 'react-redux'
 import { Fonts } from '@/components/Editor/Fonts'
+
+
 interface Props {
   textToImage: typeof textToImage
 }
@@ -33,11 +35,18 @@ function TextToImage({ textToImage }: Props) {
     }
     setTextError('')
     textToImage(textToImageState)
+
+    // After converting the text to an image, reset the input field
+    setTextToImageState(prevState => ({
+      ...prevState,
+      text: '' // This will clear the input field
+    }));
+
   }
 
   function handleInputChange(newState: Partial<TextImageParams>): void {
     setTextToImageState((prev) => ({ ...prev, ...newState }))
-  }
+      }
 
   //TODO reduce all to false before toggling
   function toggleColorPicker(type: 'textColor' | 'bgColor') {
@@ -57,7 +66,7 @@ function TextToImage({ textToImage }: Props) {
 
             {/* https://react.semantic-ui.com/elements/input/#variations-action-icon-button - input&button together */}
             <Input
-              placeholder="Enter text - הכנס טקסט"
+              placeholder="הכנס טקסט"
               type="text"
               id="text4image"
               value={textToImageState.text}
