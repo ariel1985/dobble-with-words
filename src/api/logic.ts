@@ -56,6 +56,7 @@ export const textToImageLogic = createLogic({
     done()
   },
 })
+
 export const uploadImagesLogic = createLogic({
   type: UPLOAD_IMAGES,
   async process({ action }: { action: UploadImagesAction }, dispatch, done) {
@@ -120,7 +121,6 @@ export const generatePdfLogic = createLogic({
     done()
   },
 })
-
 
 export const loadExamplesLogic = createLogic({
   type: LOAD_EXAMPLES,
