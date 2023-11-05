@@ -90,7 +90,7 @@ function TextToImage({ textToImage }: Props) {
               trigger={
                 <Button
                   icon="paint brush"
-                  style={{ color: textToImageState.textColor, 'border': '4px solid lightgray', 'border-radius': '5px', 'margin':' 0 5px' }}
+                  style={{ color: textToImageState.textColor, 'border': '4px solid lightgray', 'borderRadius': '5px', 'margin':' 0 5px' }}
                   onClick={() => toggleColorPicker('textColor')}
                 />
               }
@@ -112,7 +112,7 @@ function TextToImage({ textToImage }: Props) {
               trigger={
                 <Button
                   icon="paint brush"
-                  style={{ color: textToImageState.bgColor, 'border': '4px solid lightgray', 'border-radius': '5px', 'margin':' 0 5px' }}
+                  style={{ color: textToImageState.bgColor, 'border': '4px solid lightgray', 'borderRadius': '5px', 'margin':' 0 5px' }}
                   onClick={() => toggleColorPicker('bgColor')}
                 />
               }
