@@ -1,5 +1,6 @@
 import Ajv, { SchemaObject } from 'ajv'
-import * as Jimp from 'jimp/browser/lib/jimp'
+import 'jimp/browser/lib/jimp'
+import { Buffer } from 'buffer'
 import JsPDF from 'jspdf'
 import chunk from 'lodash/chunk'
 import random from 'lodash/random'
@@ -192,6 +193,7 @@ const rotateSymbol = (symbol: CardSymbol) =>
   new Promise<CardSymbol>((resolve, reject) => {
     const image = symbol.image
     const buffer = Buffer.from(image.base64src.split(',')[1], 'base64')
+    //@ts-ignore
     void Jimp.read(buffer).then((jimpImage) => {
       jimpImage.rotate(symbol.rotation).getBase64('image/png', (err, base64) => {
         if (err) {

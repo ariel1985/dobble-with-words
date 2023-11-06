@@ -7,11 +7,12 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-		"predeploy" : "npm run build",
-		"deploy" : "gh-pages -d build"
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"dependencies": {
 		"ajv": "^8.12.0",
+		"buffer": "^6.0.3",
 		"jimp": "^0.22.7",
 		"jspdf": "^2.5.1",
 		"react": "^18.2.0",

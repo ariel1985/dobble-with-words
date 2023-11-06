@@ -8,7 +8,7 @@ const fonts: Record<string, string> = urls.reduce(
   for (const [name, url] of Object.entries(fonts)) {
     let target = new FontFace(name, `url(${url})`)
     const loaded = await target.load()
-    console.log(`${loaded} ${name} from ${url}`)
+    console.log(`${loaded} ${name}`)
     document.fonts.add(loaded)
   }
 }

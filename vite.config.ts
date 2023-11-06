@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: './dist',
     emptyOutDir: true,
-    assetsInlineLimit: 4096 * 300
+    assetsInlineLimit: 4096 * 300,
   },
   plugins: [react()],
   resolve: {
