@@ -9,12 +9,20 @@
   <!-- add favicon -->
   <link rel="icon" href="/favicon.ico" />
   <!-- Include Chat iFrame -->
-  <script src="https://imnaibot.netlify.app/lib/chat.js"></script>
+  <script src="http://imnaibot.netlify.app:9000/lib/chat.js"></script>
   <script>
-  initRoZChat (
-    imgurl = "https://imnaibot.netlify.app/images/chaticon.png",
-    iframesrc = "https://imnaibot.netlify.app/chat/demo"
-  )
+    window.onload = () => {
+      const d = {
+        id: 'gamerim',
+        imgurl: "", // use default
+        iframesrc: "https://imnaibot.netlify.app/chat/gamerim", 
+        ms: 1000,
+        width: 300,
+        height: 400,
+        position: "right"
+      }
+      initRoZChat (d)
+    }
   </script>
 </head>
 
