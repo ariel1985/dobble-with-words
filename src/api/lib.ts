@@ -54,7 +54,6 @@ export const generateCards = (n: Prime): number[][] => {
   ])
 }
 
-
 /**
  * text to image - the good version
  * */
@@ -96,7 +95,6 @@ export const textToImage = async (
   return new Promise((resolve) => resolve(dataURL));
 };
 
-
 /**
  * Promisify the FileReader::readAsDataURL method
  */
@@ -106,7 +104,7 @@ export const fileToDataUrl = (file: File): Promise<string> =>
     reader.onerror = reject
     reader.onload = () => resolve(reader.result as string)
     reader.readAsDataURL(file)
-  })
+})
 
 /**
  * Promisify the FileReader::readAsDataURL method
@@ -117,7 +115,7 @@ export const getImageRatio = (dataUrl: string): Promise<number> =>
     img.onerror = reject
     img.onload = () => resolve(img.height / img.width)
     img.src = dataUrl
-  })
+})
 
 /**
  * Unlock event loop and wait
@@ -185,7 +183,6 @@ export const generatePdf = async (
       }
     }
   }
-
   return pdf
 }
 
@@ -195,7 +192,10 @@ const rotateSymbol = (symbol: CardSymbol) =>
     const buffer = Buffer.from(image.base64src.split(',')[1], 'base64')
     //@ts-ignore
     void Jimp.read(buffer).then((jimpImage) => {
-      jimpImage.rotate(symbol.rotation).getBase64('image/png', (err, base64) => {
+      jimpImage
+        .background(0xFFFFFFFF) 
+        .rotate(symbol.rotation)
+        .getBase64('image/png', (err, base64) => {
         if (err) {
           reject(err)
         } else {
@@ -209,7 +209,7 @@ const rotateSymbol = (symbol: CardSymbol) =>
         }
       })
     })
-  })
+})
 
 function arrangeSymbolsOnCard(card: CardImage[], symbolMargin: number, n: number) {
   const symbols: CardSymbol[] = []
@@ -231,6 +231,7 @@ function arrangeSymbolsOnCard(card: CardImage[], symbolMargin: number, n: number
         }
         // Everything ok, add it to the collection
         symbols.push(s)
+        // console.log(symbols); // no border her yet... 
         break
       }
     })
