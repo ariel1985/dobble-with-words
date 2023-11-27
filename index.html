@@ -6,7 +6,24 @@
   <link rel="icon" type="image/svg+xml" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>דאבל</title>
-  <!-- Include Chat iFrame Here-->
+  <!-- add favicon -->
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Include Chat iFrame -->
+  <script src="http://imnaibot.netlify.app:9000/lib/chat.js"></script>
+  <script>
+    window.onload = () => {
+      const d = {
+        id: 'gamerim',
+        imgurl: "", // use default
+        iframesrc: "https://imnaibot.netlify.app/chat/gamerim", 
+        ms: 1000,
+        width: 300,
+        height: 400,
+        position: "right"
+      }
+      initRoZChat (d)
+    }
+  </script>
 </head>
 
 <body>
