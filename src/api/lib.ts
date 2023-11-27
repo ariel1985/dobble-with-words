@@ -59,8 +59,8 @@ export const generateCards = (n: Prime): number[][] => {
  * */
 export const textToImage = async (
   { text, bgColor = '#ffffff', textColor = '#000000', font }: TextImageParams,
-  x = 600, 
-  y = 200
+  x = 400, 
+  y = 400
 ): Promise<string> => {
   const canvas = document.createElement('canvas');
   if (!canvas.getContext) return Promise.reject('Browser not supported');
